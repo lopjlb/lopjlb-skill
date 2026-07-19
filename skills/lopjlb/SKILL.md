@@ -10,7 +10,7 @@ description: >
   advice, or trade execution.
 metadata:
   author: LOPJLB Research
-  version: 1.2.0
+  version: 1.2.1
   category: finance-research
   tags: [equities, etf, signals, regime, hmm, screener, cli, mcp, bff, quant-research]
   documentation: https://www.lopjlb.com/developers
@@ -67,6 +67,7 @@ Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) 
 | Morning recipes | [workflows.md](references/workflows.md) |
 | Single ticker research | `lopjlb ticker SYM` (+ `scores` / `info` / `chart` / `intel`) |
 | Regime before a trade | `lopjlb regime` · `pulse` · `regime-history` |
+| World market hours / yield curve | `lopjlb hours` · `lopjlb treasuries` · https://www.lopjlb.com/market-hours |
 | Screen the universe | Free `preview` / Pro UI / Enterprise `screen` + export |
 | Earnings / alt context | `ticker SYM intel` · `calendar` · `congress` · `predict` |
 | PIT SPY25/SP500 | `lopjlb universes spy25\|spy500 [--asof YYYY-MM]` |
@@ -79,6 +80,8 @@ uv tool install lopjlb
 # or: curl -fsSL https://www.lopjlb.com/install.sh | sh
 
 lopjlb regime                  # tape context first
+lopjlb hours                   # world exchange open/closed clock
+lopjlb treasuries              # US Treasury yield curve
 lopjlb ticker AAPL             # signal teaser + regime
 lopjlb ticker AAPL intel       # earnings narrative
 lopjlb ticker AAPL scores

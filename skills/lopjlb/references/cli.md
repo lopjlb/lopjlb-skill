@@ -37,6 +37,9 @@ lopjlb ticker AAPL chart
 lopjlb regime
 lopjlb regime-history           # public ~1y HMM history
 lopjlb pulse
+lopjlb hours                    # world exchange open/closed (/market-hours)
+lopjlb hours --code NYSE
+lopjlb hours --open-only
 lopjlb search NVDA
 lopjlb preview                  # universe preview (not full 12k)
 lopjlb universes spy25          # PIT mega-cap membership (optional --asof YYYY-MM)
@@ -47,7 +50,7 @@ lopjlb congress                 # STOCK Act summary (or: congress AAPL)
 lopjlb predict                  # prediction markets summary (or: predict AAPL)
 lopjlb calendar earnings
 lopjlb calendar econ
-lopjlb treasuries
+lopjlb treasuries               # US yield curve (/treasury-rates)
 lopjlb ledger
 lopjlb signal-history
 lopjlb sd50

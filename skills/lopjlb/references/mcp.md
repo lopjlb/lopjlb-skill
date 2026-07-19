@@ -26,6 +26,7 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 - `get_prediction_markets_summary` / `get_prediction_markets_symbol`
 - `get_earnings_calendar` / `get_economic_calendar`
 - `get_treasury_rates`
+- `get_exchange_hours` (optional `code`, `open_only`)
 - `get_signal_ledger` / `get_signal_history`
 - `get_sd50_feed` / `get_sd50_allocation` (allocation = Pro book via key)
 - `get_universe_membership` / `get_universe_months` / `get_universe_maps`
