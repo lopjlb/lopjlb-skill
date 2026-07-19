@@ -4,6 +4,15 @@ Base: `https://www.lopjlb.com/bff/api/`
 
 LOPJLB is a **research layer**. Tiers gate **depth of opinion + cross-section access**, not whether prices exist.
 
+## Identity (how agents authenticate)
+
+| Path | When | How |
+|---|---|---|
+| **Free** | Default | No login — CLI/curl/BFF public + freemium |
+| **Agent claim** | User asks to auth / bind account | Follow https://www.lopjlb.com/auth.md (or `lopjlb auth claim`). Show AuthKit `verification_uri`, ask for page code, complete claim, Bearer on BFF. Claim binds `act.sub`; **Pro = Stripe/IAP on that user**, not a static agent scope. Do not invent lopjlb.com `/claim`. |
+| **Pro session** | Browser desk | WorkOS cookie + entitlement |
+| **Enterprise key** | Headless Pro REST / MCP / export | `LOPJLB_API_KEY` / `X-LOPJLB-API-Key`. Agent Bearer does **not** unlock MCP. |
+
 ## One-page matrix
 
 | Capability | Free (no login) | Pro (WorkOS session) | Enterprise (live key/session) |

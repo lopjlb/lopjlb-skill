@@ -17,6 +17,15 @@ brew install lopjlb/tap/lopjlb
 pip install lopjlb
 ```
 
+## Agent claim (optional)
+
+```bash
+lopjlb auth claim --email you@example.com   # opens AuthKit verification URI; paste page code
+lopjlb auth token --print                   # short-lived Bearer (advanced)
+```
+
+Or follow https://www.lopjlb.com/auth.md in a host agent (show link → ask for code). Free CLI needs no claim.
+
 ## Free (no key)
 
 ```bash

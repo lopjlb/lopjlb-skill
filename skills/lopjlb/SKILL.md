@@ -10,7 +10,7 @@ description: >
   advice, or trade execution.
 metadata:
   author: LOPJLB Research
-  version: 1.1.0
+  version: 1.2.0
   category: finance-research
   tags: [equities, etf, signals, regime, hmm, screener, cli, mcp, bff, quant-research]
   documentation: https://www.lopjlb.com/developers
@@ -52,8 +52,9 @@ Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) 
 4. **Do not rebuild the universe** by looping free ticker calls. Cross-section = Pro UI or Enterprise `/universe` / `lopjlb screen` / export.
 5. **CLI product path is REST.** HTTP MCP is a separate Enterprise host protocol at `POST /bff/api/mcp`.
 6. **Escalate credentials only when the user has them.** Default to Free CLI/curl.
-7. **Respect cadence** — nightly signals ≠ live tape. See [cadence.md](references/cadence.md).
-8. **Do not over-claim** CallCards or BUYs as advice. See [glossary.md](references/glossary.md) “What not to infer”.
+7. **Agent auth / claim:** When the user wants to authenticate, claim an agent registration, or bind a user account, fetch https://www.lopjlb.com/auth.md and follow it. **Show `verification_uri` (AuthKit hosts the claim page — do not invent lopjlb.com `/claim`).** Ask the user for the code on that page; complete claim; exchange token; call BFF with Bearer. Never ask humans to paste access tokens. Or guide them to `lopjlb auth claim`. Claim ≠ Pro grant (Pro = Stripe/IAP on claimed user). Bearer ≠ Enterprise MCP.
+8. **Respect cadence** — nightly signals ≠ live tape. See [cadence.md](references/cadence.md).
+9. **Do not over-claim** CallCards or BUYs as advice. See [glossary.md](references/glossary.md) “What not to infer”.
 
 ## Decision tree
 
@@ -62,6 +63,7 @@ Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) 
 | Why LOPJLB vs yfinance / TV | [positioning.md](references/positioning.md) |
 | Field meanings / provenance | [glossary.md](references/glossary.md) |
 | Free vs Pro vs Enterprise | [api-tiers.md](references/api-tiers.md) |
+| Authenticate / claim agent registration | https://www.lopjlb.com/auth.md · `lopjlb auth claim` |
 | Morning recipes | [workflows.md](references/workflows.md) |
 | Single ticker research | `lopjlb ticker SYM` (+ `scores` / `info` / `chart` / `intel`) |
 | Regime before a trade | `lopjlb regime` · `pulse` · `regime-history` |

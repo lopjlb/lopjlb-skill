@@ -68,7 +68,7 @@ Public in-page tools via `document.modelContext` (Chrome origin trial). Tools li
 
 ## Related
 
-- https://www.lopjlb.com/auth.md
+- https://www.lopjlb.com/auth.md — Agent Registration / claim for **REST Bearer** (separate from MCP; key still required here)
 - https://www.lopjlb.com/developers#mcp
 - https://www.lopjlb.com/bff/api/schema/metrics
 - Bulk export (REST, not MCP): `GET /bff/api/export/signals.csv` (thin)

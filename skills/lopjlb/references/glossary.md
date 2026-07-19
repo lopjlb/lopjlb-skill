@@ -37,12 +37,17 @@ Short definitions for the big JSON payloads. Full math: https://www.lopjlb.com/m
 | `sharpe` | P | Risk-adjusted return stat on the published window (full pack) |
 | `best_combo` | P | Grid-searched / preferred setup label for the name (full pack) |
 | `composite_score` | P | Blended research rank used in screening (full pack) |
-| `quality_score` / `value_score` / `growth_score` / `garp_score` | P | Fund / factor sleeve scores (full pack / scores path) |
-| `archetype` | P | Which fund engine weights apply (e.g. equity vs REIT/BDC/CEF) |
+| `quality_score` / `value_score` / `growth_score` / `garp_score` | P | Corrected V3 fundamentals scores. For stocks, `quality_score` is the archetype-weighted Value/Growth/GARP composite; income assets use dedicated quality models |
+| `archetype` | P | Stock weighting profile: Dividend Compounder, Growth Compounder, Value / Recovery, or Balanced. ` (blended)` marks low-confidence membership blended toward Balanced without changing the base label |
 | `current_price` / `daily_change` | S/C | Latest session quote context |
 | `sparkline` | C | Compact recent closes for display |
 | `depth` | C | `public` = thin teaser; `full` = Pro session or Enterprise key |
 | `market_cap` / `sector` / `name` | S | Reference identity |
+
+UI score bands: standard income quality is green at 60+, yellow at 40+;
+stock composite is green at 70+, yellow at 50+; high-growth is purple at 70+,
+green at 50+, yellow at 35+. Lower values are red. These are display bands, not
+buy/sell thresholds.
 
 ## Overlays (full pack / charts)
 
