@@ -8,6 +8,7 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 | Transport | Streamable HTTP (JSON-RPC) |
 | Auth | `X-LOPJLB-API-Key` (live Enterprise entitlement) |
 | Discovery | https://www.lopjlb.com/.well-known/mcp/server-card.json |
+| Docs | https://www.lopjlb.com/developers#mcp |
 
 ## Tools (typical)
 
@@ -15,7 +16,9 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 - `search_tickers`
 - `get_ticker_summary` (compact; uses signal-card internally)
 - `get_ticker_detail`
-- `get_screener_preview`
+- `get_screener_preview` (anonymous preview slice)
+- `screen_universe` (Enterprise full-universe rank; compact top N, default 25 / max 50 — use REST/CLI for full book)
+- `get_peers` (sector/industry peers for a symbol)
 - `get_market_pulse`
 - `get_congress_summary` / `get_congress_symbol`
 - `get_prediction_markets_summary` / `get_prediction_markets_symbol`
@@ -26,6 +29,8 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 - `get_universe_membership` / `get_universe_months` / `get_universe_maps`
 - `get_earnings_intel`
 - `get_intraday_snapshot`
+
+Prefer `get_ticker_summary` and `screen_universe` for token budgets. Bulk CSV / archives stay REST/CLI (`lopjlb export`), not MCP.
 
 ## Cursor / Claude config sketch
 
@@ -61,5 +66,5 @@ Public in-page tools via `document.modelContext` (Chrome origin trial). Tools li
 ## Related
 
 - https://www.lopjlb.com/auth.md
-- https://www.lopjlb.com/developers
+- https://www.lopjlb.com/developers#mcp
 - Bulk export (REST, not MCP): `GET /bff/api/export/signals.csv`
