@@ -1,74 +1,70 @@
-# LOPJLB API tiers
+# Free vs Pro vs Enterprise (exact behavior)
 
 Base: `https://www.lopjlb.com/bff/api/`
 
-## Free (no login)
+LOPJLB is a **research layer**. Tiers gate **depth of opinion + cross-section access**, not whether prices exist.
 
-| Capability | Notes |
-|---|---|
-| Regime, search, universe-preview, market pulse | Public |
-| Thin `signal-card` | `depth=public` — direction, regime, price, sparkline, headline PF |
-| Detail, earnings intel, fundamentals, 30d sparkline | Freemium; charts clamped |
-| Browser screener | SPY25 sample only |
+## One-page matrix
 
-**Not Free:** full PF packs, composite/fund/best-combo on card, full `/universe`, peers, bulk export, MCP, webhooks, intraday suite.
+| Capability | Free (no login) | Pro (WorkOS session) | Enterprise (live key/session) |
+|---|---|---|---|
+| Positioning | Thin research teaser + freemium ticker stack | Full browser research desk | Headless agents + ops |
+| `GET …/signal-card/{SYM}` | `depth=public` teaser (direction, regime, price, sparkline, headline PF) | `depth=full` (PF packs, composite, fund scores, best-combo, overlays) | Same full pack via `X-LOPJLB-API-Key` |
+| `GET …/detail/{SYM}` · intel · fundamentals · info | Freemium OK (ticker budget) | Same + higher quote batch caps | Same |
+| Sparkline / charts | ~30d clamp | Long history | Long + **intraday** charts |
+| Screener | SPY25 sample / `universe-preview` | Full 12k+ UI, filters, saved views, **UI CSV of filtered view** | UI + headless `GET …/bigfive/universe` (`lopjlb screen`) |
+| Peers / plays / chat / SD50 allocation CSV·JSON | — / public SD50 **feed** only | Yes (browser) | Yes (+ key) |
+| `GET …/hmm/latest` · pulse · calendars · congress · predict · treasuries · ledger | Yes | Yes | Yes |
+| `GET …/hmm/history` | Last ~1y (`truncated=true`) | Full with `?full=1` | Full with key |
+| `GET …/universes/spy25\|spy500` · maps | Yes (PIT membership) | Yes | Yes |
+| Bulk latest signals | — | — | `GET …/export/signals.csv\|parquet` |
+| Historical SD50 / backtest packs | — | — | `GET …/export/archives/…` |
+| HTTP MCP `POST …/mcp` | — (browser WebMCP only) | — | Yes |
+| Webhooks / I·EXH live scanner | — | — | Yes |
+| Rate limits | 120/min · 10k/day IP; ticker 30/min · 500/day | Session (same IP budget) | Key 600/min · 50k/day |
 
-## Pro (WorkOS session + pro entitlement)
+Pro is **browser-first**. Headless `/universe` without an Enterprise key is not the product path (keys map to Pro REST).
 
-| Capability | Notes |
-|---|---|
-| Full universe screener UI | Filters, saved views |
-| Full `signal-card` | `depth=full` via session cookie on BFF |
-| Screener UI CSV | Filtered view only — not Enterprise bulk snapshot |
-| Long charts, email alerts, peers, chat, plays | Browser workflow |
+## Endpoint behavior cheat sheet
 
-Pro is **browser-first**. Headless `/universe` without an Enterprise key is not the product path (Enterprise key maps to Pro REST).
+| Endpoint / CLI | Free | Pro session | Enterprise key |
+|---|---|---|---|
+| `lopjlb ticker SYM` → signal-card | thin | full | full |
+| `lopjlb ticker SYM intel` | yes (budget) | yes | yes |
+| `lopjlb preview` | yes | yes | yes |
+| `lopjlb screen` → `/bigfive/universe` | 401/402 | browser cookie path | **yes** |
+| `lopjlb peers SYM` | 402 | yes | yes |
+| `lopjlb regime-history` | ~1y | `--full` | `--full` |
+| `lopjlb export signals --out …` | 402 | 402 | yes |
+| `lopjlb export archive …` | 402 | 402 | yes |
+| `lopjlb intraday SYM` | 402 | 402 | yes |
+| `POST /mcp` tools | — | — | yes |
 
-## Enterprise (live entitlement + API key)
-
-| Capability | Notes |
-|---|---|
-| `X-LOPJLB-API-Key` | Mint in Settings after entitlement is active |
-| Full signal-card + Pro REST | `/bigfive/universe`, peers, `lopjlb screen` |
-| HTTP MCP | `POST /bff/api/mcp` |
-| Bulk latest-signal export | CSV / Parquet — `lopjlb export signals --out …` |
-| Webhooks, intraday | Slack/Discord; live scanner / 1D charts |
-
-Lapsed entitlement → HTTP `402 enterprise_required`.
-
-## signal-card `depth`
+## signal-card `depth` (exact)
 
 ```bash
-# Anon
-curl -s https://www.lopjlb.com/bff/api/bigfive/signal-card/AAPL
-# → depth=public
+# Anon → depth=public
+curl -s https://www.lopjlb.com/bff/api/bigfive/signal-card/AAPL | jq .depth
 
-# Enterprise key
+# Enterprise key → depth=full
 curl -s -H "X-LOPJLB-API-Key: $LOPJLB_API_KEY" \
-  https://www.lopjlb.com/bff/api/bigfive/signal-card/AAPL
-# → depth=full
+  https://www.lopjlb.com/bff/api/bigfive/signal-card/AAPL | jq .depth
 ```
 
-**Public fields (teaser):** symbol, display_symbol, name, sector, asset_class, direction, score, regime, hmm_days_in_regime, current_price, daily_change, sparkline, pf, win_rate, market_cap, depth.
+**Public teaser fields:** symbol, name, sector, direction, score, regime, hmm_days_in_regime, price, daily_change, sparkline, headline `pf` / `win_rate`, market_cap, `depth`.
 
-**Full pack adds:** PF packs (base / HMM / composite), best-combo, composite_score, fund scores / archetype, ATR / exhaustion / coil, opt metrics, and related research fields.
+**Full pack adds:** PF packs (base / HMM / composite), best-combo, composite_score, fund scores / archetype, ATR / exhaustion / coil, opt metrics, related research fields.
 
-## Rate limits
-
-| Caller | Per minute | Per day |
-|---|---|---|
-| Anonymous / session (IP) | 120 | 10,000 |
-| Anon freemium ticker (signal-card / detail / intel) | 30 | 500 |
-| Enterprise API key | 600 | 50,000 |
+Field meanings: [glossary.md](glossary.md).
 
 ## Errors
 
-- `401` — invalid / revoked key
-- `402` — `pro_required` or `enterprise_required` (body may include `upgrade_url`)
-- `429` — rate limited
+| HTTP | Meaning |
+|---|---|
+| 401 | Auth / invalid key |
+| 402 | `pro_required` or `enterprise_required` |
+| 429 | Rate limited |
 
 ## Docs
 
-- https://www.lopjlb.com/pricing.md
-- https://www.lopjlb.com/developers
-- https://www.lopjlb.com/api/llms.txt
+- https://www.lopjlb.com/pricing.md · https://www.lopjlb.com/developers · https://www.lopjlb.com/api/llms.txt

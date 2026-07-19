@@ -11,12 +11,19 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 
 ## Tools (typical)
 
-- `get_market_regime`
+- `get_market_regime` / `get_regime_history`
 - `search_tickers`
 - `get_ticker_summary` (compact; uses signal-card internally)
 - `get_ticker_detail`
 - `get_screener_preview`
 - `get_market_pulse`
+- `get_congress_summary` / `get_congress_symbol`
+- `get_prediction_markets_summary` / `get_prediction_markets_symbol`
+- `get_earnings_calendar` / `get_economic_calendar`
+- `get_treasury_rates`
+- `get_signal_ledger` / `get_signal_history`
+- `get_sd50_feed`
+- `get_universe_membership` / `get_universe_months` / `get_universe_maps`
 - `get_earnings_intel`
 - `get_intraday_snapshot`
 
