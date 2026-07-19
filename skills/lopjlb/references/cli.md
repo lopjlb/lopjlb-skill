@@ -42,7 +42,11 @@ lopjlb treasuries
 lopjlb ledger
 lopjlb signal-history
 lopjlb sd50
-lopjlb schema                   # CLI → REST map (prefer over guessing MCP)
+lopjlb schema                   # CLI → REST map + schema URL pointers
+lopjlb schema metrics           # 166 screener columns (ui_id ↔ api_key)
+lopjlb schema presets
+lopjlb schema scopes
+lopjlb ticker AAPL income       # BDC/REIT/CEF/ETF/pref income.metrics
 lopjlb doctor
 ```
 
@@ -68,10 +72,14 @@ Exact keys drift; always read live JSON. These show **intent**:
 export LOPJLB_API_KEY=lopjlb_live_…
 # or: lopjlb --key lopjlb_live_… …
 
-lopjlb screen                   # full /universe (Pro REST via key)
+lopjlb screen --asset all --profile screener   # merge 5 partitions (Pro REST via key)
+lopjlb screen --asset etf --scope WEEKLY --limit 50 --profile core
+lopjlb screen --preset momentum-pullback --limit 25
 lopjlb peers AAPL
+lopjlb sd50 allocation          # Pro allocation JSON (not public L1 feed)
+lopjlb iexh --limit 40          # Enterprise I·EXH overlay
 lopjlb regime-history --full    # full HMM history since ~2010
-lopjlb export signals --out signals.csv   # --out or --stdout required
+lopjlb export signals --out signals.csv   # thin pkl snapshot — not screener book
 lopjlb export archive --source sd50                 # list months
 lopjlb export archive --source sd50 --month 2024_12 # list files
 lopjlb export archive --source sd50 --month 2024_12 \
@@ -80,6 +88,8 @@ lopjlb intraday AAPL
 ```
 
 Mint keys in https://www.lopjlb.com/settings after Enterprise entitlement is active.
+
+**Note:** `export/signals.csv` ≠ full screener columns. For screener-shaped rows use `lopjlb screen --profile screener`. PIT `universes spy500` ≠ live SP500 screen `--scope SP500`.
 
 ## Exit codes
 

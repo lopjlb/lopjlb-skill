@@ -9,28 +9,31 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 | Auth | `X-LOPJLB-API-Key` (live Enterprise entitlement) |
 | Discovery | https://www.lopjlb.com/.well-known/mcp/server-card.json |
 | Docs | https://www.lopjlb.com/developers#mcp |
+| Version | 1.4.0 |
 
 ## Tools (typical)
 
+- `get_metrics_schema` / `list_screener_presets` / `list_screener_scopes` (definitions — call before inventing columns)
 - `get_market_regime` / `get_regime_history`
 - `search_tickers`
 - `get_ticker_summary` (compact; uses signal-card internally)
 - `get_ticker_detail`
 - `get_screener_preview` (anonymous preview slice)
-- `screen_universe` (Enterprise full-universe rank; compact top N, default 25 / max 50 — use REST/CLI for full book)
-- `get_peers` (sector/industry peers for a symbol)
+- `screen_universe` — `asset` stocks|etf|crypto|index|commodity|all; `scope`; `preset`; `profile` compact|core|screener; limit ≤50
+- `get_peers`
 - `get_market_pulse`
 - `get_congress_summary` / `get_congress_symbol`
 - `get_prediction_markets_summary` / `get_prediction_markets_symbol`
 - `get_earnings_calendar` / `get_economic_calendar`
 - `get_treasury_rates`
 - `get_signal_ledger` / `get_signal_history`
-- `get_sd50_feed`
+- `get_sd50_feed` / `get_sd50_allocation` (allocation = Pro book via key)
 - `get_universe_membership` / `get_universe_months` / `get_universe_maps`
 - `get_earnings_intel`
-- `get_intraday_snapshot`
+- `get_intraday_snapshot` (per-symbol chart)
+- `get_intraday_exhaustion` (I·EXH overlay — distinct from snapshot)
 
-Prefer `get_ticker_summary` and `screen_universe` for token budgets. Bulk CSV / archives stay REST/CLI (`lopjlb export`), not MCP.
+Prefer `get_metrics_schema` + `get_ticker_summary` + `screen_universe` (compact/core). Full screener book: CLI `lopjlb screen --profile screener`. Bulk CSV / archives stay REST/CLI (`lopjlb export`) — **export ≠ screener columns**.
 
 ## Cursor / Claude config sketch
 
@@ -67,4 +70,5 @@ Public in-page tools via `document.modelContext` (Chrome origin trial). Tools li
 
 - https://www.lopjlb.com/auth.md
 - https://www.lopjlb.com/developers#mcp
-- Bulk export (REST, not MCP): `GET /bff/api/export/signals.csv`
+- https://www.lopjlb.com/bff/api/schema/metrics
+- Bulk export (REST, not MCP): `GET /bff/api/export/signals.csv` (thin)

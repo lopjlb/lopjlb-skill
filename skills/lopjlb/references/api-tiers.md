@@ -12,15 +12,16 @@ LOPJLB is a **research layer**. Tiers gate **depth of opinion + cross-section ac
 | `GET …/signal-card/{SYM}` | `depth=public` teaser (direction, regime, price, sparkline, headline PF) | `depth=full` (PF packs, composite, fund scores, best-combo, overlays) | Same full pack via `X-LOPJLB-API-Key` |
 | `GET …/detail/{SYM}` · intel · fundamentals · info | Freemium OK (ticker budget) | Same + higher quote batch caps | Same |
 | Sparkline / charts | ~30d clamp | Long history | Long + **intraday** charts |
-| Screener | SPY25 sample / `universe-preview` | Full 12k+ UI, filters, saved views, **UI CSV of filtered view** | UI + headless `GET …/bigfive/universe` (`lopjlb screen`) |
-| Peers / plays / chat / SD50 allocation CSV·JSON | — / public SD50 **feed** only | Yes (browser) | Yes (+ key) |
+| Screener | SPY25 sample / `universe-preview` | Full 12k+ UI, filters, saved views, **UI CSV of filtered view** | UI + headless 5× `/universe*` (`lopjlb screen --asset`) |
+| Metric / preset / scope schema | `GET …/schema/metrics\|presets\|scopes` | Same | Same |
+| Peers / chat / SD50 allocation CSV·JSON | — / public SD50 **feed** only | Yes (browser) | Yes (+ key); CLI `sd50 allocation` |
 | `GET …/hmm/latest` · pulse · calendars · congress · predict · treasuries · ledger | Yes | Yes | Yes |
 | `GET …/hmm/history` | Last ~1y (`truncated=true`) | Full with `?full=1` | Full with key |
-| `GET …/universes/spy25\|spy500` · maps | Yes (PIT membership) | Yes | Yes |
-| Bulk latest signals | — | — | `GET …/export/signals.csv\|parquet` |
+| `GET …/universes/spy25\|spy500` · maps | Yes (PIT membership; ≠ live SP500 screen) | Yes | Yes |
+| Bulk latest signals | — | — | Thin `export/signals.csv` (≠ screener book) |
 | Historical SD50 / backtest packs | — | — | `GET …/export/archives/…` |
-| HTTP MCP `POST …/mcp` | — (browser WebMCP only) | — | Yes |
-| Webhooks / I·EXH live scanner | — | — | Yes |
+| HTTP MCP `POST …/mcp` | — (browser WebMCP only) | — | Yes (multi-asset screen + schema tools) |
+| Webhooks / I·EXH live scanner | — | — | Yes (`lopjlb iexh` / MCP `get_intraday_exhaustion`) |
 | Rate limits | 120/min · 10k/day IP; ticker 30/min · 500/day | Session (same IP budget) | Key 600/min · 50k/day |
 
 Pro is **browser-first**. Headless `/universe` without an Enterprise key is not the product path (keys map to Pro REST).
@@ -32,11 +33,14 @@ Pro is **browser-first**. Headless `/universe` without an Enterprise key is not 
 | `lopjlb ticker SYM` → signal-card | thin | full | full |
 | `lopjlb ticker SYM intel` | yes (budget) | yes | yes |
 | `lopjlb preview` | yes | yes | yes |
-| `lopjlb screen` → `/bigfive/universe` | 401/402 | browser cookie path | **yes** |
+| `lopjlb schema metrics` | yes | yes | yes |
+| `lopjlb screen --asset …` | 401/402 | browser cookie path | **yes** (product headless path) |
 | `lopjlb peers SYM` | 402 | yes | yes |
+| `lopjlb sd50 allocation` | 402 | yes | yes |
 | `lopjlb regime-history` | ~1y | `--full` | `--full` |
-| `lopjlb export signals --out …` | 402 | 402 | yes |
+| `lopjlb export signals --out …` | 402 | 402 | yes (thin) |
 | `lopjlb export archive …` | 402 | 402 | yes |
+| `lopjlb iexh` | 402 | 402 | yes |
 | `lopjlb intraday SYM` | 402 | 402 | yes |
 | `POST /mcp` tools | — | — | yes |
 

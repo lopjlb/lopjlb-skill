@@ -1,6 +1,18 @@
 # Field glossary (agent-facing)
 
+**Authoritative machine-readable dictionary (166 screener columns):**
+
+```bash
+curl -s https://www.lopjlb.com/bff/api/schema/metrics
+# or: lopjlb schema metrics
+# static: https://www.lopjlb.com/schema/screener.json
+```
+
+Each metric has `ui_id` (screener column) ↔ `api_key` (JSON field), `group`, `description`, `surfaces`, `asset_classes`. Do **not** invent column names. Presets/scopes: `lopjlb schema presets|scopes`.
+
 Short definitions for the big JSON payloads. Full math: https://www.lopjlb.com/methodology
+
+**Important:** `export/signals.csv` is a thin pickle snapshot — **not** the full screener book. Use Pro `lopjlb screen --asset all --profile screener` (Enterprise key) for screener-shaped rows. PIT `/universes/spy500` ≠ live SP500 screen scope.
 
 ## Provenance legend
 
