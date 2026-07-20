@@ -29,7 +29,7 @@ npx skills add lopjlb/lopjlb-skill
 npx skills add https://github.com/lopjlb/lopjlb-skill
 ```
 
-Then ask your agent about U.S. equity signals, HMM regime, or `lopjlb ticker AAPL`.
+Then ask your agent about U.S. equity signals, HMM regime, `lopjlb ticker AAPL`, or the NLP desk (`lopjlb ask` / MCP `ask_research_desk`).
 
 ## Layout
 

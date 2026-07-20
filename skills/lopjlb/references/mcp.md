@@ -9,7 +9,7 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 | Auth | `X-LOPJLB-API-Key` (live Enterprise entitlement) |
 | Discovery | https://www.lopjlb.com/.well-known/mcp/server-card.json |
 | Docs | https://www.lopjlb.com/developers#mcp |
-| Version | 1.4.0 |
+| Version | 1.5.0 |
 
 ## Tools (typical)
 
@@ -33,8 +33,9 @@ Separate host protocol for Cursor / Claude Desktop / similar. **Not** the CLI pr
 - `get_earnings_intel`
 - `get_intraday_snapshot` (per-symbol chart)
 - `get_intraday_exhaustion` (I·EXH overlay — distinct from snapshot)
+- `ask_research_desk` — NLP desk (same pipeline as `/chat`); args `message`, optional `history` (≤2 Q&A), `session_id`; buffered markdown + route/symbol/followups. Prefer structured tools for screens.
 
-Prefer `get_metrics_schema` + `get_ticker_summary` + `screen_universe` (compact/core). Full screener book: CLI `lopjlb screen --profile screener`. Bulk CSV / archives stay REST/CLI (`lopjlb export`) — **export ≠ screener columns**.
+Prefer `get_metrics_schema` + `get_ticker_summary` + `screen_universe` (compact/core). NLP desk: `ask_research_desk` or CLI `lopjlb ask`. Full screener book: CLI `lopjlb screen --profile screener`. Bulk CSV / archives stay REST/CLI (`lopjlb export`) — **export ≠ screener columns**.
 
 ## Cursor / Claude config sketch
 

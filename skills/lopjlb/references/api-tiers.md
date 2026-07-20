@@ -23,13 +23,13 @@ LOPJLB is a **research layer**. Tiers gate **depth of opinion + cross-section ac
 | Sparkline / charts | ~30d clamp | Long history | Long + **intraday** charts |
 | Screener | SPY25 sample / `universe-preview` | Full 12k+ UI, filters, saved views, **UI CSV of filtered view** | UI + headless 5× `/universe*` (`lopjlb screen --asset`) |
 | Metric / preset / scope schema | `GET …/schema/metrics\|presets\|scopes` | Same | Same |
-| Peers / chat / SD50 allocation CSV·JSON | — / public SD50 **feed** only | Yes (browser) | Yes (+ key); CLI `sd50 allocation` |
+| Peers / research chat / SD50 allocation | Chat: anon 1/day · free 3/day (`lopjlb ask` / `/chat`); SD50 **feed** public | Chat 10/day + peers + allocation | Chat unlimited + peers + allocation + MCP `ask_research_desk` |
 | `GET …/hmm/latest` · pulse · calendars · congress · predict · treasuries · ledger | Yes | Yes | Yes |
 | `GET …/hmm/history` | Last ~1y (`truncated=true`) | Full with `?full=1` | Full with key |
 | `GET …/universes/spy25\|spy500` · maps | Yes (PIT membership; ≠ live SP500 screen) | Yes | Yes |
 | Bulk latest signals | — | — | Thin `export/signals.csv` (≠ screener book) |
 | Historical SD50 / backtest packs | — | — | `GET …/export/archives/…` |
-| HTTP MCP `POST …/mcp` | — (browser WebMCP only) | — | Yes (multi-asset screen + schema tools) |
+| HTTP MCP `POST …/mcp` | — (browser WebMCP only) | — | Yes (screen/schema + `ask_research_desk` NLP desk) |
 | Webhooks / I·EXH live scanner | — | — | Yes (`lopjlb iexh` / MCP `get_intraday_exhaustion`) |
 | Rate limits | 120/min · 10k/day IP; ticker 30/min · 500/day | Session (same IP budget) | Key 600/min · 50k/day |
 
@@ -41,6 +41,8 @@ Pro is **browser-first**. Headless `/universe` without an Enterprise key is not 
 |---|---|---|---|
 | `lopjlb ticker SYM` → signal-card | thin | full | full |
 | `lopjlb ticker SYM intel` | yes (budget) | yes | yes |
+| `lopjlb ask "…"` → `/research/chat` | yes (anon/free caps) | yes (Pro caps) | yes (unlimited) |
+| MCP `ask_research_desk` | — | — | yes (buffered desk) |
 | `lopjlb preview` | yes | yes | yes |
 | `lopjlb schema metrics` | yes | yes | yes |
 | `lopjlb screen --asset …` | 401/402 | browser cookie path | **yes** (product headless path) |

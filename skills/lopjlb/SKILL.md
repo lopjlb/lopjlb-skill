@@ -66,6 +66,7 @@ Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) 
 | Authenticate / claim agent registration | https://www.lopjlb.com/auth.md · `lopjlb auth claim` |
 | Morning recipes | [workflows.md](references/workflows.md) |
 | Single ticker research | `lopjlb ticker SYM` (+ `scores` / `info` / `chart` / `intel`) |
+| NLP research desk | `lopjlb ask "…"` or MCP `ask_research_desk` (same `/chat` pipeline; structured tools cheaper for screens) |
 | Regime before a trade | `lopjlb regime` · `pulse` · `regime-history` |
 | World market hours / yield curve | `lopjlb hours` · `lopjlb treasuries` · https://www.lopjlb.com/market-hours |
 | Screen the universe | Free `preview` / Pro UI / Enterprise `screen` + export |
@@ -84,6 +85,7 @@ lopjlb hours                   # world exchange open/closed clock
 lopjlb treasuries              # US Treasury yield curve
 lopjlb ticker AAPL             # signal teaser + regime
 lopjlb ticker AAPL intel       # earnings narrative
+lopjlb ask "What is the current market regime?"
 lopjlb ticker AAPL scores
 lopjlb preview                 # SPY25-style sample — not full universe
 lopjlb universes spy25

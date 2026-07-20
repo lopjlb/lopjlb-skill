@@ -36,6 +36,8 @@ lopjlb ticker AAPL info
 lopjlb ticker AAPL chart
 lopjlb regime
 lopjlb regime-history           # public ~1y HMM history
+lopjlb ask "What is the current market regime?"
+lopjlb ask "AAPL signal brief" --payload   # full done JSON (route/followups/quota)
 lopjlb pulse
 lopjlb hours                    # world exchange open/closed (/market-hours)
 lopjlb hours --code NYSE
