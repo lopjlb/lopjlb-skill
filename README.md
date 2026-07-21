@@ -31,6 +31,24 @@ npx skills add https://github.com/lopjlb/lopjlb-skill
 
 Then ask your agent about U.S. equity signals, HMM regime, `lopjlb ticker AAPL`, or the NLP desk (`lopjlb ask` / MCP `ask_research_desk`).
 
+## What you get (shapes)
+
+```bash
+lopjlb regime
+# → { "regime": "BULL", "days_in_regime": 12, "asof": "…" }
+
+lopjlb ticker AAPL
+# → { "symbol": "AAPL", "direction": "BUY", "regime": "…", "depth": "public", … }
+
+lopjlb ask "vidia …" --payload
+# → { "route": "ticker_context", "symbol": "NVDA", "response": "### Snapshot…", "embeds": [] }
+
+lopjlb ask "upcomin economic event" --payload
+# → { "route": "desk", "symbol": null, "response": "### Economic Calendar…" }
+```
+
+Full recipes + Enterprise `screen` / `schema metrics` samples: [skills/lopjlb/references/workflows.md](skills/lopjlb/references/workflows.md).
+
 ## Layout
 
 ```

@@ -1,19 +1,21 @@
-# Why LOPJLB (not yfinance / Schwab / Finviz / TradingView)
+# Why LOPJLB (not yfinance / Schwab / Finviz / TradingView / GuruFocus)
 
 LOPJLB is **not primarily a data API**. It is a quant research layer on top of market data: a nightly desk that re-scores thousands of U.S. tickers and ships **evidence with the call**.
 
 ## Side-by-side (AAPL mental model)
 
-| Need | yfinance / broker API | Finviz / TradingView | LOPJLB |
-|---|---|---|---|
-| Last price / OHLCV | Excellent | Excellent | Available as support, not the product |
-| DIY indicators | You build | You build / chart | Nightly published signals + overlays |
-| Per-ticker backtested call | No | Rare / opaque | Direction + PF / Sharpe / win rate / expectancy |
-| Market regime gating | DIY | Limited | HMM regime on every name + history |
-| Universe rank (12k+) | DIY | Screener filters | Nightly scored cross-section (Pro / Enterprise) |
-| Earnings narrative | Transcript dump | Headlines | Multi-quarter CallCard synthesis (themes, guidance) |
-| PIT mega-cap / SPX panels | DIY | Partial | `/universes/spy25` · `/universes/spy500` |
-| Agent / CLI / MCP | DIY glue | Weak | First-class BFF + `lopjlb` CLI + Enterprise MCP |
+| Need | yfinance / broker API | Finviz / TradingView | GuruFocus | LOPJLB |
+|---|---|---|---|---|
+| Last price / OHLCV | Excellent | Excellent | Support | Available as support, not the product |
+| DIY indicators / charts | You build | You build / chart | Limited | Nightly published signals + overlays |
+| DCF / owner-earnings models | DIY | Rare | Excellent | Not the product (FUND scores absorb inputs) |
+| Guru / 13F portfolio tracking | DIY | Rare | Excellent | No — not a guru-tracker |
+| Per-ticker backtested call | No | Rare / opaque | No | Direction + PF / Sharpe / win rate / expectancy |
+| Market regime gating | DIY | Limited | Limited | HMM regime on every name + history |
+| Universe rank (12k+) | DIY | Screener filters | Screener filters | Nightly scored cross-section (Pro / Enterprise) |
+| Earnings narrative | Transcript dump | Headlines | Calendar + estimates | Multi-quarter CallCard synthesis (themes, guidance) |
+| PIT mega-cap / SPX panels | DIY | Partial | Partial | `/universes/spy25` · `/universes/spy500` |
+| Agent / CLI / MCP | DIY glue | Weak | Weak | First-class BFF + `lopjlb` CLI + Enterprise MCP |
 
 ## What free market tools already do well
 
@@ -22,6 +24,14 @@ LOPJLB is **not primarily a data API**. It is a quant research layer on top of m
 - Broker order entry
 
 Use those when the job is **data acquisition** or **execution**.
+
+## What GuruFocus already does well
+
+- DCF and owner-earnings valuation models
+- Ratio calculators and deep fundamental history
+- Guru / 13F portfolio databases
+
+Use GuruFocus when the job is **modeling intrinsic value**. Use LOPJLB when the job is a **nightly, regime-aware directional opinion with evidence**.
 
 ## What LOPJLB adds
 
@@ -40,6 +50,7 @@ Use those when the job is **data acquisition** or **execution**.
 - Not IBKR portfolio / option-chain MCP (use trading_skills if you need a broker)
 - Not Plaid / personal bank sync (BankSync)
 - Not DCF Excel generation (Anthropic financial-modeling skill) — we supply research inputs
+- Not a GuruFocus clone (calculators, owner-earnings encyclopedias, 13F guru trackers)
 - Not a local ARIMA/GARCH package dump (K-Dense Scientific Skills for methodology)
 
 ## Complementary stack
@@ -47,13 +58,13 @@ Use those when the job is **data acquisition** or **execution**.
 | Job | Tool |
 |---|---|
 | Desk opinion + universe + CallCards | **LOPJLB** (this skill / CLI / Enterprise MCP) |
+| DCF / intrinsic-value modeling | GuruFocus or Anthropic financial-modeling skill |
 | Local econometrics / Monte Carlo | K-Dense Scientific Skills |
 | Broker options / rolls / account | trading_skills (IBKR) |
 | Personal bank balances | BankSync MCP |
-| Build DCF workbooks | Anthropic financial-modeling skill |
 
 ## One-line verdict
 
-**Raw market data → free tools. Daily backtested, regime-aware research opinions with narrative synthesis → LOPJLB.**
+**Raw market data → free tools. Valuation encyclopedias → GuruFocus. Daily backtested, regime-aware research opinions with narrative synthesis → LOPJLB.**
 
-Live product pages: [how it works](https://www.lopjlb.com/how-it-works) · [compare](https://www.lopjlb.com/compare) · [methodology](https://www.lopjlb.com/methodology) · [schema](https://www.lopjlb.com/bff/api/schema/metrics)
+Live product pages: [how it works](https://www.lopjlb.com/how-it-works) · [compare](https://www.lopjlb.com/compare) · [vs GuruFocus](https://www.lopjlb.com/compare/gurufocus) · [methodology](https://www.lopjlb.com/methodology) · [schema](https://www.lopjlb.com/bff/api/schema/metrics)

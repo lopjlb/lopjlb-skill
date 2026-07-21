@@ -78,6 +78,86 @@ lopjlb screen
 lopjlb export signals --out signals.csv
 ```
 
+Sample row shape (`lopjlb screen --profile compact` — Enterprise key; illustrative):
+
+```json
+{
+  "symbol": "AAPL",
+  "direction": "BUY",
+  "composite_score": 72,
+  "quality_score": 80,
+  "regime": "BULL"
+}
+```
+
+## 3b) NLP research desk (`lopjlb ask`)
+
+Same pipeline as `/chat`. Free caps apply (anon 1/day · signed-in free 3/day). Use `--payload` for the done frame.
+
+```bash
+lopjlb ask "What is the current market regime?"
+lopjlb ask "vidia is struggling — what's in the pack?" --payload
+lopjlb ask "what are the upcomin economic event" --payload
+lopjlb ask "amazons' chart" --payload
+```
+
+Done-frame shape (ticker CONTEXT — illustrative):
+
+```json
+{
+  "route": "ticker_context",
+  "symbol": "NVDA",
+  "response": "### Snapshot\n- Directional signal: BUY …",
+  "followups": [{"label": "NVDA chart", "prompt": "…"}],
+  "embeds": []
+}
+```
+
+Desk calendar (no ticker):
+
+```json
+{
+  "route": "desk",
+  "symbol": null,
+  "response": "### Economic Calendar …\n| Time | Event | Country | …",
+  "followups": [{"label": "Market regime", "prompt": "…"}],
+  "embeds": []
+}
+```
+
+Chart ask (embeds present for clients that mount widgets; CLI still points at `/stock/AMZN`):
+
+```json
+{
+  "route": "ticker_context",
+  "symbol": "AMZN",
+  "embeds": [{"kind": "ticker_chart", "symbol": "AMZN", "range_days": 90}],
+  "response": "### AMZN — chart snapshot\n- Last close: … → /stock/AMZN"
+}
+```
+
+Python: `Client().ask("…")` returns the same done dict.
+
+## 3c) Schema before inventing columns
+
+```bash
+lopjlb schema metrics   # public — no key
+```
+
+Illustrative slice:
+
+```json
+{
+  "columns": [
+    {"ui_id": "composite", "api_key": "composite_score", "type": "number"},
+    {"ui_id": "direction", "api_key": "direction", "type": "string"},
+    {"ui_id": "quality", "api_key": "quality_score", "type": "number"}
+  ]
+}
+```
+
+(Exact list is live at `/bff/api/schema/metrics` — ~166 columns.)
+
 ## 4) Scan earnings / news / alt context
 
 ```bash
