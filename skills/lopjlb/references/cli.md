@@ -92,7 +92,7 @@ lopjlb screen --asset etf --scope WEEKLY --limit 50 --profile core
 lopjlb screen --preset momentum-pullback --limit 25
 lopjlb peers AAPL
 lopjlb sd50 allocation          # Pro allocation JSON (not public L1 feed)
-lopjlb iexh --limit 40          # Enterprise I·EXH overlay
+lopjlb iexh --limit 40          # I·EXH overlay (API key)
 lopjlb regime-history --full    # full HMM history since ~2010
 lopjlb export signals --out signals.csv   # thin pkl snapshot — not screener book
 lopjlb export archive --source sd50                 # list months

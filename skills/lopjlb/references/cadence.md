@@ -18,7 +18,7 @@ Staleness rule of thumb: treat signal fields as **prior session / overnight** un
 
 | Surface | Cadence |
 |---|---|
-| Live I·EXH scanner / intraday charts | Enterprise; bars/polling (seconds–minutes) |
+| Live I·EXH scanner / intraday charts | Pro (browser); bars/polling (seconds–minutes). CLI/MCP via Enterprise key |
 | SD50 MTD tracker | Public; short CDN / poller cache |
 | Live quotes batch | Freemium; provider-delayed quotes, batch-capped |
 | Prediction markets / some news | Poller (~tens of minutes), not tick |
@@ -37,6 +37,6 @@ Staleness rule of thumb: treat signal fields as **prior session / overnight** un
 
 - Free `signal-card` price/sparkline ≠ real-time tape
 - Nightly BUY does not update mid-session on Free/Pro signal packs
-- Enterprise intraday does **not** rewrite the nightly research opinion unless the product surface says so
+- Pro/Enterprise intraday does **not** rewrite the nightly research opinion unless the product surface says so
 
 Product walkthrough: https://www.lopjlb.com/how-it-works

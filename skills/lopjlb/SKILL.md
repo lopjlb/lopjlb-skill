@@ -62,7 +62,7 @@ Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) 
 |---|---|
 | Why LOPJLB vs yfinance / TV | [positioning.md](references/positioning.md) |
 | Field meanings / provenance | [glossary.md](references/glossary.md) |
-| Free vs Pro vs Enterprise | [api-tiers.md](references/api-tiers.md) |
+| Free vs Essential vs Research vs Pro vs Enterprise | [api-tiers.md](references/api-tiers.md) |
 | Authenticate / claim agent registration | https://www.lopjlb.com/auth.md · `lopjlb auth claim` |
 | Morning recipes | [workflows.md](references/workflows.md) |
 | Single ticker research | `lopjlb ticker SYM` (+ `scores` / `info` / `chart` / `intel`) |
@@ -103,7 +103,7 @@ lopjlb export signals --out signals.csv
 lopjlb export archive --source sd50 --month 2024_12
 ```
 
-Keys unlock full `signal-card`, Pro REST (`/universe`, peers), MCP, export, archives, intraday.
+Keys unlock full `signal-card`, Pro REST (`/universe`, peers), MCP, export, archives, and CLI intraday/I·EXH.
 
 ## Methodology boundaries
 
@@ -117,7 +117,7 @@ Users should **not** infer that a high PF or a BUY is a personal recommendation.
 | Doc | Contents |
 |---|---|
 | [positioning.md](references/positioning.md) | Why not yfinance / Finviz / TradingView |
-| [api-tiers.md](references/api-tiers.md) | Free / Pro / Enterprise matrix + endpoint behavior |
+| [api-tiers.md](references/api-tiers.md) | Free / Essential / Research / Pro / Enterprise matrix + endpoint behavior |
 | [glossary.md](references/glossary.md) | Scores, regime, depth, provenance tags |
 | [workflows.md](references/workflows.md) | Morning recipes + sample shapes |
 | [cadence.md](references/cadence.md) | Nightly vs intraday vs delayed |

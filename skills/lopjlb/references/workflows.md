@@ -7,7 +7,7 @@ LOPJLB is a **daily opinionated workflow**. Prefer these recipes over random end
 ```bash
 lopjlb regime
 lopjlb pulse
-lopjlb regime-history          # public ~1y; --full with Pro/key
+lopjlb regime-history          # public ~1y; --full with Research session or Enterprise key
 ```
 
 **You want:** current HMM label, days in regime, breadth/pulse, recent regime path.

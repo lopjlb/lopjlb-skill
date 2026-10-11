@@ -1,4 +1,4 @@
-# Free vs Pro vs Enterprise (exact behavior)
+# Free vs Essential vs Research vs Pro vs Enterprise
 
 Base: `https://www.lopjlb.com/bff/api/`
 
@@ -9,50 +9,45 @@ LOPJLB is a **research layer**. Tiers gate **depth of opinion + cross-section ac
 | Path | When | How |
 |---|---|---|
 | **Free** | Default | No login — CLI/curl/BFF public + freemium |
-| **Agent claim** | User asks to auth / bind account | Follow https://www.lopjlb.com/auth.md (or `lopjlb auth claim`). Show AuthKit `verification_uri`, ask for page code, complete claim, Bearer on BFF. Claim binds `act.sub`; **Pro = Stripe/IAP on that user**, not a static agent scope. Do not invent lopjlb.com `/claim`. |
-| **Pro session** | Browser desk | WorkOS cookie + entitlement |
+| **Agent claim** | User asks to auth / bind account | Follow https://www.lopjlb.com/auth.md (or `lopjlb auth claim`). Show AuthKit `verification_uri`, ask for page code, complete claim, Bearer on BFF. Claim binds `act.sub`; **Essential / Research / Pro follow Stripe/IAP on that user**, not a static agent scope. Do not invent lopjlb.com `/claim`. |
+| **Paid desk session** | Browser desk | WorkOS cookie + `essential`, `research`, or `pro` entitlement |
 | **Enterprise key** | Headless Pro REST / MCP / export | `LOPJLB_API_KEY` / `X-LOPJLB-API-Key`. Agent Bearer does **not** unlock MCP. |
 
 ## One-page matrix
 
-| Capability | Free (no login) | Pro (WorkOS session) | Enterprise (live key/session) |
-|---|---|---|---|
-| Positioning | Thin research teaser + freemium ticker stack | Full browser research desk | Headless agents + ops |
-| `GET …/signal-card/{SYM}` | `depth=public` teaser (direction, regime, price, sparkline, headline PF) | `depth=full` (PF packs, composite, fund scores, best-combo, overlays) | Same full pack via `X-LOPJLB-API-Key` |
-| `GET …/detail/{SYM}` · intel · fundamentals · info | Freemium OK (ticker budget) | Same + higher quote batch caps | Same |
-| Sparkline / charts | ~30d clamp | Long history | Long + **intraday** charts |
-| Screener | SPY25 sample / `universe-preview` | Full 12k+ UI, filters, saved views, **UI CSV of filtered view** | UI + headless 5× `/universe*` (`lopjlb screen --asset`) |
-| Metric / preset / scope schema | `GET …/schema/metrics\|presets\|scopes` | Same | Same |
-| Peers / research chat / SD50 allocation | Chat: anon 1/day · free 3/day (`lopjlb ask` / `/chat`); SD50 **feed** public | Chat 10/day + peers + allocation | Chat unlimited + peers + allocation + MCP `ask_research_desk` |
-| `GET …/hmm/latest` · pulse · calendars · congress · predict · treasuries · ledger | Yes | Yes | Yes |
-| `GET …/hmm/history` | Last ~1y (`truncated=true`) | Full with `?full=1` | Full with key |
-| `GET …/universes/spy25\|spy500` · maps | Yes (PIT membership; ≠ live SP500 screen) | Yes | Yes |
-| Bulk latest signals | — | — | Thin `export/signals.csv` (≠ screener book) |
-| Historical SD50 / backtest packs | — | — | `GET …/export/archives/…` |
-| HTTP MCP `POST …/mcp` | — (browser WebMCP only) | — | Yes (screen/schema + `ask_research_desk` NLP desk) |
-| Webhooks / I·EXH live scanner | — | — | Yes (`lopjlb iexh` / MCP `get_intraday_exhaustion`) |
-| Rate limits | 120/min · 10k/day IP; ticker 30/min · 500/day | Session (same IP budget) | Key 600/min · 50k/day |
+| Capability | Free | Essential ($79) | Research ($129) | Pro ($249) | Enterprise ($1,599) |
+|---|---|---|---|---|---|
+| Positioning | SPY25 teaser + freemium ticker stack | S&P 500 daily desk | Full 12k+ daily book | Complete live browser desk | Headless agents + ops |
+| `GET …/signal-card/{SYM}` | `depth=public` teaser | Fund + exhaustion on S&P 500 | Fund + exhaustion on full book | Full PF/composite/best-combo pack | Same full pack via key |
+| `GET …/detail/{SYM}` · intel · fundamentals · info | Yes (ticker budget) | Yes | Yes | Yes + higher quote batch caps | Same |
+| Charts | ~30d clamp | Through 1Y | Through 5Y / MAX | Long history + ATM IV + live 1D | Same + MCP/CLI via key |
+| Screener | SPY25 preview | S&P 500 | Full 12k+ universe + UI CSV | Full book + I·EXH + options | Pro REST + headless `/universe*` |
+| Research chat | Guest 1/day · signed-in 3/day | 3/day | 3/day | 10/day | Unlimited + MCP desk tool |
+| Peers / SD50 allocation | — / public feed only | — | — | Yes | Yes |
+| Live I·EXH / intraday | — | — | — | Browser | Browser + CLI/key |
+| HTTP MCP / webhooks / bulk export | — | — | — | — | Yes |
+| Rate limits | 120/min · 10k/day IP; ticker 30/min · 500/day | Session/IP budget | Session/IP budget | Session/IP budget | Key 600/min · 50k/day |
 
-Pro is **browser-first**. Headless `/universe` without an Enterprise key is not the product path (keys map to Pro REST).
+Paid desk tiers are **browser-first**. Headless screening, MCP, and export use an Enterprise key (which also unlocks Pro REST).
 
 ## Endpoint behavior cheat sheet
 
-| Endpoint / CLI | Free | Pro session | Enterprise key |
+| Endpoint / CLI | Free | Paid browser session | Enterprise key |
 |---|---|---|---|
-| `lopjlb ticker SYM` → signal-card | thin | full | full |
+| `lopjlb ticker SYM` → signal-card | thin | Depth follows paid tier | full |
 | `lopjlb ticker SYM intel` | yes (budget) | yes | yes |
-| `lopjlb ask "…"` → `/research/chat` | yes (anon/free caps) | yes (Pro caps) | yes (unlimited) |
+| `lopjlb ask "…"` → `/research/chat` | yes (anon/free caps) | yes (tier cap) | yes (unlimited) |
 | MCP `ask_research_desk` | — | — | yes (buffered desk) |
 | `lopjlb preview` | yes | yes | yes |
 | `lopjlb schema metrics` | yes | yes | yes |
-| `lopjlb screen --asset …` | 401/402 | browser cookie path | **yes** (product headless path) |
-| `lopjlb peers SYM` | 402 | yes | yes |
-| `lopjlb sd50 allocation` | 402 | yes | yes |
-| `lopjlb regime-history` | ~1y | `--full` | `--full` |
+| `lopjlb screen --asset …` | 401/402 | Browser desk is the supported session path | **yes** (product headless path) |
+| `lopjlb peers SYM` | 402 | Pro only | yes |
+| `lopjlb sd50 allocation` | 402 | Pro only | yes |
+| `lopjlb regime-history` | ~1y | Long-history access follows tier | `--full` |
 | `lopjlb export signals --out …` | 402 | 402 | yes (thin) |
 | `lopjlb export archive …` | 402 | 402 | yes |
-| `lopjlb iexh` | 402 | 402 | yes |
-| `lopjlb intraday SYM` | 402 | 402 | yes |
+| `lopjlb iexh` | 402 | 402 (CLI needs key) | yes |
+| `lopjlb intraday SYM` | 402 | 402 (CLI needs key) | yes |
 | `POST /mcp` tools | — | — | yes |
 
 ## signal-card `depth` (exact)
@@ -77,7 +72,7 @@ Field meanings: [glossary.md](glossary.md).
 | HTTP | Meaning |
 |---|---|
 | 401 | Auth / invalid key |
-| 402 | `pro_required` or `enterprise_required` |
+| 402 | `essential_required`, `research_required`, `pro_required`, or `enterprise_required` |
 | 429 | Rate limited |
 
 ## Docs

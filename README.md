@@ -19,7 +19,7 @@ LOPJLB sits on top of market data and turns it into a **nightly opinionated work
 | A **full research stack** per symbol | Profile, short interest, chart + overlays, backtests, fundamentals, scores |
 | A **universe-ranking system** | Nightly re-score of 12k+ U.S. names — the product is the cross-section, not one-off lookups |
 
-**Compare:** [yfinance / Schwab / Finviz / TradingView](skills/lopjlb/references/positioning.md) · [Free vs Pro vs Enterprise](skills/lopjlb/references/api-tiers.md) · [Morning workflows](skills/lopjlb/references/workflows.md)
+**Compare:** [yfinance / Schwab / Finviz / TradingView](skills/lopjlb/references/positioning.md) · [Tier access matrix](skills/lopjlb/references/api-tiers.md) · [Morning workflows](skills/lopjlb/references/workflows.md)
 
 ## Install
 
@@ -55,7 +55,7 @@ Full recipes + Enterprise `screen` / `schema metrics` samples: [skills/lopjlb/re
 skills/lopjlb/SKILL.md                 # agent entrypoint
 skills/lopjlb/references/
   positioning.md                       # why not yfinance / Finviz / TV
-  api-tiers.md                         # Free / Pro / Enterprise matrix
+  api-tiers.md                         # Free / Essential / Research / Pro / Enterprise
   glossary.md                          # scores, regime, depth, flags
   workflows.md                         # morning research recipes + sample shapes
   cadence.md                           # nightly vs intraday vs delayed

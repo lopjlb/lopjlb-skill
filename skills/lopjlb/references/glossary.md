@@ -29,7 +29,7 @@ Short definitions for the big JSON payloads. Full math: https://www.lopjlb.com/m
 |---|---|---|
 | `direction` | P | Daily call: typically BUY / SELL / flat (encoding may be string or ±1 upstream) |
 | `score` / PERF | P | Risk-adjusted performance composite (0–100 style quality across windows) |
-| `hmm_regime` / `regime` | P | Macro state: BULL, RECOVERY, RANGING, BEAR, CRISIS |
+| `hmm_regime` / `regime` | P | Macro state: BULL, RECOVERY, BEAR, CRISIS |
 | `hmm_days_in_regime` | P | Sessions spent in current regime label |
 | `pf` | P | Headline profit factor (public teaser may expose only this) |
 | `win_rate` | P | Backtest win rate attached to the call |
@@ -57,6 +57,10 @@ buy/sell thresholds.
 | ATR trail | P | Adaptive volatility stop level / state |
 | HiLo / coil | P | 60-day range flip / compression state |
 | Combo5 / related | P | Multi-signal combination family used in ranking |
+| `opt_iv_atm` | S/C | Latest ATM call IV % (screener / Key stats). Chart history = sparkline `series.opt_iv_atm` (may be gappy). Not options flow |
+| `opt_iv_pctile` | C | % of ~1Y sessions with ATM IV ≤ today (IV-%ile) |
+| `opt_iv_rank` | C | Position in 52w ATM IV range 0–100 (IV RNK; powers Key stats 52-week IV bar) |
+| `opt_iv_low_52w` / `opt_iv_high_52w` | C | 52w ATM IV low/high % |
 
 ## Regime history (`/hmm/history`)
 
