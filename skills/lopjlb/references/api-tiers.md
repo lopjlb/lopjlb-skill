@@ -48,7 +48,7 @@ Paid desk tiers are **browser-first**. Headless screening, MCP, and export use a
 | `lopjlb export archive …` | 402 | 402 | yes |
 | `lopjlb iexh` | 402 | 402 (CLI needs key) | yes |
 | `lopjlb intraday SYM` | 402 | 402 (CLI needs key) | yes |
-| `POST /mcp` tools | — | — | yes |
+| `POST /bff/api/mcp` tools | — | — | yes |
 
 ## signal-card `depth` (exact)
 

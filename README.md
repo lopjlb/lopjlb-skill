@@ -35,7 +35,7 @@ Then ask your agent about U.S. equity signals, HMM regime, `lopjlb ticker AAPL`,
 
 ```bash
 lopjlb regime
-# → { "regime": "BULL", "days_in_regime": 12, "asof": "…" }
+# → { "success": true, "regime": { "regime": "BULL", "days_in_regime": 10, "date": "…" } }
 
 lopjlb ticker AAPL
 # → { "symbol": "AAPL", "direction": "BUY", "regime": "…", "depth": "public", … }

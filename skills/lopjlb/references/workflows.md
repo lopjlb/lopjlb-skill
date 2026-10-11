@@ -17,9 +17,12 @@ Sample shape (`lopjlb regime`):
 
 ```json
 {
-  "regime": "BULL",
-  "days_in_regime": 12,
-  "asof": "2026-07-17"
+  "success": true,
+  "regime": {
+    "date": "2026-10-09",
+    "regime": "BULL",
+    "days_in_regime": 10
+  }
 }
 ```
 
@@ -156,7 +159,7 @@ Illustrative slice:
 }
 ```
 
-(Exact list is live at `/bff/api/schema/metrics` — ~166 columns.)
+(Exact list is live at `/bff/api/schema/metrics` — 178 columns.)
 
 ## 4) Scan earnings / news / alt context
 

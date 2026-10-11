@@ -58,7 +58,7 @@ lopjlb ledger
 lopjlb signal-history
 lopjlb sd50
 lopjlb schema                   # CLI → REST map + schema URL pointers
-lopjlb schema metrics           # 166 screener columns (ui_id ↔ api_key)
+lopjlb schema metrics           # 178 screener columns (ui_id ↔ api_key)
 lopjlb schema presets
 lopjlb schema scopes
 lopjlb ticker AAPL income       # BDC/REIT/CEF/ETF/pref income.metrics
@@ -71,7 +71,7 @@ Stdout is JSON (pretty on TTY). Errors → stderr JSON with `retryable`.
 
 Exact keys drift; always read live JSON. These show **intent**:
 
-`lopjlb regime` → `{ "regime": "BULL", "days_in_regime": 12, … }`
+`lopjlb regime` → `{ "success": true, "regime": { "regime": "BULL", "days_in_regime": 10, "date": "…" }, … }`
 
 `lopjlb ticker AAPL` → thin card: `direction`, `regime`, headline `pf`, `depth: "public"`, `stock_url`, `next_actions`
 
