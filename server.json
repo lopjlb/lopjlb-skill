@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.lopjlb/research",
+  "title": "LOPJLB Research",
+  "description": "U.S. equity quant research: market regime, signals, scores, screens and CallCards.",
+  "version": "1.5.0",
+  "websiteUrl": "https://www.lopjlb.com/developers#mcp",
+  "icons": [
+    {
+      "src": "https://www.lopjlb.com/icon",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.lopjlb.com/mcp"
+    }
+  ]
+}

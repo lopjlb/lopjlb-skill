@@ -1,6 +1,6 @@
 # lopjlb-skill
 
-Agent Skill for [LOPJLB](https://www.lopjlb.com) — a **quant research layer**, not a market-data API.
+Everything an agent needs for [LOPJLB](https://www.lopjlb.com): the Agent Skill, the Claude Code plugin, the remote MCP config and the MCP Registry entry. LOPJLB is a **quant research layer**, not a market-data API.
 
 If you want raw OHLCV, free tools (yfinance, broker APIs, Finviz, TradingView) are enough.
 If you want **daily, backtested, regime-aware research opinions** with narrative synthesis across 12,000+ U.S. names, LOPJLB is the value add.
@@ -81,16 +81,22 @@ skills/lopjlb/references/
 .claude-plugin/plugin.json             # Claude Code plugin manifest
 .claude-plugin/marketplace.json        # lets `/plugin marketplace add lopjlb/lopjlb-skill` work
 .mcp.json                              # remote MCP (https://www.lopjlb.com/mcp, OAuth)
+server.json                            # MCP Registry entry (com.lopjlb/research)
 ```
 
 ## Maintainers
 
-Source of truth: private monorepo `packaging/lopjlb-skill/`.
+Source of truth: `packaging/lopjlb-skill/` in the private monorepo. Every merge
+to its `main` that touches that folder is mirrored here by the
+`sync-skill-repo` workflow, and a new `.claude-plugin/plugin.json` version is
+tagged `v<version>`. Don't edit this repo directly: the next sync overwrites
+it. Bump `version` in `plugin.json` and `metadata.version` in `SKILL.md`
+together; the workflow refuses a mismatch.
 
-```bash
-rsync -a --delete packaging/lopjlb-skill/ /path/to/lopjlb-skill/ --exclude .git
-cd /path/to/lopjlb-skill && git add -A && git commit -m "sync skill" && git push
-```
+`server.json` is the [MCP Registry](https://registry.modelcontextprotocol.io)
+entry (`com.lopjlb/research`, DNS-verified for lopjlb.com). Publish a new
+server version with `mcp-publisher publish server.json` after
+`mcp-publisher login dns --domain lopjlb.com`.
 
 ## Links
 
