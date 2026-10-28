@@ -18,7 +18,7 @@ Staleness rule of thumb: treat signal fields as **prior session / overnight** un
 
 | Surface | Cadence |
 |---|---|
-| Live I·EXH scanner / intraday charts | Pro (browser); bars/polling (seconds–minutes). CLI/MCP via Enterprise key |
+| Live I·EXH scanner / intraday charts | Pro (browser); bars/polling (seconds–minutes). CLI via Enterprise key; MCP at Pro+ |
 | SD50 MTD tracker | Public; short CDN / poller cache |
 | Live quotes batch | Freemium; provider-delayed quotes, batch-capped |
 | Prediction markets / some news | Poller (~tens of minutes), not tick |

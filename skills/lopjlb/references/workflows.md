@@ -51,14 +51,21 @@ Sample shape (`lopjlb ticker AAPL` summary — illustrative):
 ```json
 {
   "symbol": "AAPL",
-  "direction": "BUY",
+  "name": "Apple Inc.",
+  "direction": 1,
   "regime": "BULL",
-  "scores": {"composite_score": 72, "quality_score": 68},
-  "depth": "public",
+  "hmm_days_in_regime": 38,
+  "scores": {"score": 5.0},
   "stock_url": "https://www.lopjlb.com/stock/AAPL",
-  "next_actions": ["get_earnings_intel symbol=AAPL", "lopjlb ticker AAPL intel"]
+  "vintage": "2026-10-27",
+  "published_at": "2026-10-28T03:21:50Z",
+  "next_actions": ["lopjlb ticker AAPL intel", "lopjlb ticker AAPL scores"]
 }
 ```
+
+`direction` is numeric on ticker summaries: `1` BUY, `-1` SELL, `0` or null none
+(null when the call is gated for your plan). Screener rows spell it out
+(`"BUY"` / `"SELL"`). `vintage` is the nightly session the values come from.
 
 Anon cards are `depth=public` (thin). Do not claim full PF packs without Pro/key.
 
@@ -159,7 +166,7 @@ Illustrative slice:
 }
 ```
 
-(Exact list is live at `/bff/api/schema/metrics` — 178 columns.)
+(Exact list is live at `/bff/api/schema/metrics` — 180 columns.)
 
 ## 4) Scan earnings / news / alt context
 

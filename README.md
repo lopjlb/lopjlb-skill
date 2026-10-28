@@ -5,7 +5,7 @@ Agent Skill for [LOPJLB](https://www.lopjlb.com) — a **quant research layer**,
 If you want raw OHLCV, free tools (yfinance, broker APIs, Finviz, TradingView) are enough.
 If you want **daily, backtested, regime-aware research opinions** with narrative synthesis across 12,000+ U.S. names, LOPJLB is the value add.
 
-This skill teaches hosts (Cursor / Claude Code / Codex) how to call the **public surface** (BFF REST, CLI, Enterprise MCP). It does **not** ship proprietary signal engines or the private monorepo.
+This skill teaches hosts (Cursor / Claude Code / Codex) how to call the **public surface** (BFF REST, CLI, remote MCP on every plan). It does **not** ship proprietary signal engines or the private monorepo.
 
 ## Verdict (read this first)
 
@@ -29,6 +29,23 @@ npx skills add lopjlb/lopjlb-skill
 npx skills add https://github.com/lopjlb/lopjlb-skill
 ```
 
+### Claude Code plugin (skill + remote MCP)
+
+```text
+/plugin marketplace add lopjlb/lopjlb-skill
+/plugin install lopjlb@lopjlb
+```
+
+The plugin bundles this skill and the remote MCP server at
+`https://www.lopjlb.com/mcp`. On first use Claude asks you to sign in with your
+LOPJLB account (OAuth); the tools you get follow your plan, and the free plan
+works.
+
+### Remote MCP only
+
+Add `https://www.lopjlb.com/mcp` as a custom connector (Claude, ChatGPT
+developer mode) or in `mcp.json` (Cursor, VS Code). Sign in when asked.
+
 Then ask your agent about U.S. equity signals, HMM regime, `lopjlb ticker AAPL`, or the NLP desk (`lopjlb ask` / MCP `ask_research_desk`).
 
 ## What you get (shapes)
@@ -38,7 +55,7 @@ lopjlb regime
 # → { "success": true, "regime": { "regime": "BULL", "days_in_regime": 10, "date": "…" } }
 
 lopjlb ticker AAPL
-# → { "symbol": "AAPL", "direction": "BUY", "regime": "…", "depth": "public", … }
+# → { "symbol": "AAPL", "direction": 1, "regime": "BULL", "vintage": "2026-10-27", … }   (1 = BUY, -1 = SELL)
 
 lopjlb ask "vidia …" --payload
 # → { "route": "ticker_context", "symbol": "NVDA", "response": "### Snapshot…", "embeds": [] }
@@ -60,6 +77,10 @@ skills/lopjlb/references/
   workflows.md                         # morning research recipes + sample shapes
   cadence.md                           # nightly vs intraday vs delayed
   cli.md · mcp.md                      # surface detail
+  robinhood.md                         # read-only recipe beside Robinhood's own tools
+.claude-plugin/plugin.json             # Claude Code plugin manifest
+.claude-plugin/marketplace.json        # lets `/plugin marketplace add lopjlb/lopjlb-skill` work
+.mcp.json                              # remote MCP (https://www.lopjlb.com/mcp, OAuth)
 ```
 
 ## Maintainers

@@ -51,14 +51,14 @@ lopjlb universes months --for spy25
 lopjlb universes maps           # renames + delists
 lopjlb congress                 # STOCK Act summary (or: congress AAPL)
 lopjlb predict                  # prediction markets summary (or: predict AAPL)
-lopjlb calendar earnings
+lopjlb calendar earnings        # 7 days back → 14 ahead (--days-back / --days-ahead, max 120)
 lopjlb calendar econ
 lopjlb treasuries               # US yield curve (/treasury-rates)
 lopjlb ledger
 lopjlb signal-history
 lopjlb sd50
 lopjlb schema                   # CLI → REST map + schema URL pointers
-lopjlb schema metrics           # 178 screener columns (ui_id ↔ api_key)
+lopjlb schema metrics           # 180 screener columns (ui_id ↔ api_key)
 lopjlb schema presets
 lopjlb schema scopes
 lopjlb ticker AAPL income       # BDC/REIT/CEF/ETF/pref income.metrics
@@ -116,6 +116,10 @@ Mint keys in https://www.lopjlb.com/settings after Enterprise entitlement is act
 | 3 | auth (HTTP 401) |
 | 4 | entitlement (HTTP 402) |
 | 5 | rate_limited (HTTP 429) |
+| 6 | network (no HTTP response: DNS, connect, TLS, timeout) |
+
+Errors are one JSON line on stderr. `retryable` is true for 429, 5xx and
+`{"error": "network"}`; GETs already retried twice with backoff before that.
 
 ## Python
 
@@ -138,4 +142,4 @@ CLI does **not** call MCP for product commands. Optional smoke only:
 lopjlb debug mcp tools
 ```
 
-Hosts (Cursor / Claude) should call `POST /bff/api/mcp` directly — see [mcp.md](mcp.md).
+Hosts (Claude, ChatGPT, Cursor) connect to `https://www.lopjlb.com/mcp` directly and sign in — see [mcp.md](mcp.md).

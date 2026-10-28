@@ -1,0 +1,14 @@
+{
+  "name": "lopjlb",
+  "owner": {
+    "name": "LOPJLB Research",
+    "email": "contact@lopjlb.com"
+  },
+  "plugins": [
+    {
+      "name": "lopjlb",
+      "source": "./",
+      "description": "LOPJLB quant research skill plus the remote MCP server (regime, signals, scores, screens, CallCards)."
+    }
+  ]
+}

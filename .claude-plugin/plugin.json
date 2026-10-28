@@ -1,0 +1,18 @@
+{
+  "name": "lopjlb",
+  "displayName": "LOPJLB Research",
+  "version": "1.3.0",
+  "description": "Quant research for U.S. equities, ETFs and crypto: nightly backtested signals, HMM market regime, factor scores and earnings CallCards. Bundles the LOPJLB skill and the remote MCP server (sign in with your LOPJLB account; tools follow your plan).",
+  "author": {
+    "name": "LOPJLB Research",
+    "email": "contact@lopjlb.com",
+    "url": "https://www.lopjlb.com"
+  },
+  "homepage": "https://www.lopjlb.com/developers",
+  "repository": "https://github.com/lopjlb/lopjlb-skill",
+  "keywords": ["finance", "equities", "stocks", "quant", "market-regime", "screener", "mcp"],
+  "documentationUrl": "https://www.lopjlb.com/developers#mcp",
+  "supportUrl": "https://www.lopjlb.com/contact",
+  "privacyPolicyUrl": "https://www.lopjlb.com/privacy",
+  "termsOfServiceUrl": "https://www.lopjlb.com/terms"
+}

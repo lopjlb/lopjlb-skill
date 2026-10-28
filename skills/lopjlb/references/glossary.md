@@ -1,6 +1,6 @@
 # Field glossary (agent-facing)
 
-**Authoritative machine-readable dictionary (178 screener columns):**
+**Authoritative machine-readable dictionary (180 screener columns):**
 
 ```bash
 curl -s https://www.lopjlb.com/bff/api/schema/metrics
@@ -37,8 +37,8 @@ Short definitions for the big JSON payloads. Full math: https://www.lopjlb.com/m
 | `sharpe` | P | Risk-adjusted return stat on the published window (full pack) |
 | `best_combo` | P | Grid-searched / preferred setup label for the name (full pack) |
 | `composite_score` | P | Blended research rank used in screening (full pack) |
-| `quality_score` / `value_score` / `growth_score` / `garp_score` | P | Corrected V3 fundamentals scores. For stocks, `quality_score` is the archetype-weighted Value/Growth/GARP composite; income assets use dedicated quality models |
-| `archetype` | P | Stock weighting profile: Dividend Compounder, Growth Compounder, Value / Recovery, or Balanced. ` (blended)` marks low-confidence membership blended toward Balanced without changing the base label |
+| `quality_score` / `value_score` / `growth_score` / `garp_score` | P | V4 fundamentals scores. For stocks, `quality_score` is the archetype-weighted Value/Growth/GARP composite plus bounded tilts (positive tilts scaled by valuation support) minus risk penalties; income assets use dedicated quality models. Not comparable across asset classes |
+| `archetype` | P | Stock weighting profile: Dividend Compounder, Growth Compounder, Value / Recovery, or Balanced. Every archetype weights Value at least 50%. ` (blended)` marks a best membership below 0.9, blended toward Balanced without changing the base label |
 | `current_price` / `daily_change` | S/C | Latest session quote context |
 | `sparkline` | C | Compact recent closes for display |
 | `depth` | C | `public` = thin teaser; `full` = Pro session or Enterprise key |

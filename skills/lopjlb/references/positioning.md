@@ -15,7 +15,7 @@ LOPJLB is **not primarily a data API**. It is a quant research layer on top of m
 | Universe rank (12k+) | DIY | Screener filters | Screener filters | Nightly scored cross-section (Pro / Enterprise) |
 | Earnings narrative | Transcript dump | Headlines | Calendar + estimates | Multi-quarter CallCard synthesis (themes, guidance) |
 | PIT mega-cap / SPX panels | DIY | Partial | Partial | `/universes/spy25` · `/universes/spy500` |
-| Agent / CLI / MCP | DIY glue | Weak | Weak | First-class BFF + `lopjlb` CLI + Enterprise MCP |
+| Agent / CLI / MCP | DIY glue | Weak | Weak | First-class BFF + `lopjlb` CLI + remote MCP (every plan) |
 
 ## What free market tools already do well
 
@@ -57,7 +57,7 @@ Use GuruFocus when the job is **modeling intrinsic value**. Use LOPJLB when the 
 
 | Job | Tool |
 |---|---|
-| Desk opinion + universe + CallCards | **LOPJLB** (this skill / CLI / Enterprise MCP) |
+| Desk opinion + universe + CallCards | **LOPJLB** (this skill / CLI / MCP) |
 | DCF / intrinsic-value modeling | GuruFocus or Anthropic financial-modeling skill |
 | Local econometrics / Monte Carlo | K-Dense Scientific Skills |
 | Broker options / rolls / account | trading_skills (IBKR) |

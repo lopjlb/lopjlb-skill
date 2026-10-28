@@ -3,16 +3,17 @@ name: lopjlb
 description: >
   Use LOPJLB, a quant research layer (not a raw market-data API): nightly backtested
   signals, HMM regime, factor scores, earnings CallCard synthesis, and universe ranking
-  for 12,000+ U.S. names via BFF REST, lopjlb CLI/PyPI, or Enterprise HTTP MCP. Use when
+  for 12,000+ U.S. names via BFF REST, lopjlb CLI/PyPI, or the remote MCP server (every plan). Use when
   the user wants research opinions, regime context, screener shortlists, signal-card,
   or LOPJLB API/MCP — not when they only need OHLCV (prefer yfinance/broker). Do NOT use
   for options flow, on-chain DeFi, futures, non-U.S. markets, personalized investment
   advice, or trade execution.
+license: Proprietary. See LICENSE.
 metadata:
   author: LOPJLB Research
-  version: 1.2.1
+  version: 1.3.0
   category: finance-research
-  tags: [equities, etf, signals, regime, hmm, screener, cli, mcp, bff, quant-research]
+  tags: equities, etf, signals, regime, hmm, screener, cli, mcp, bff, quant-research
   documentation: https://www.lopjlb.com/developers
   llms: https://www.lopjlb.com/llms.txt
   pricing: https://www.lopjlb.com/pricing.md
@@ -50,9 +51,9 @@ Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) 
 2. **Position the product correctly** — research opinions, not a price dump. See [positioning.md](references/positioning.md).
 3. **Free `signal-card` is thin** (`depth=public`). Full PF / composite / best-combo need Pro session or Enterprise key (`depth=full`).
 4. **Do not rebuild the universe** by looping free ticker calls. Cross-section = Pro UI or Enterprise `/universe` / `lopjlb screen` / export.
-5. **CLI product path is REST.** HTTP MCP is a separate Enterprise host protocol at `POST /bff/api/mcp`.
+5. **CLI product path is REST.** MCP is a separate host protocol at `https://www.lopjlb.com/mcp`, on every plan after OAuth sign-in (tools follow the plan).
 6. **Escalate credentials only when the user has them.** Default to Free CLI/curl.
-7. **Agent auth / claim:** When the user wants to authenticate, claim an agent registration, or bind a user account, fetch https://www.lopjlb.com/auth.md and follow it. **Show `verification_uri` (AuthKit hosts the claim page — do not invent lopjlb.com `/claim`).** Ask the user for the code on that page; complete claim; exchange token; call BFF with Bearer. Never ask humans to paste access tokens. Or guide them to `lopjlb auth claim`. Claim ≠ Pro grant (Pro = Stripe/IAP on claimed user). Bearer ≠ Enterprise MCP.
+7. **Agent auth / claim:** When the user wants to authenticate, claim an agent registration, or bind a user account, fetch https://www.lopjlb.com/auth.md and follow it. **Show `verification_uri` (AuthKit hosts the claim page — do not invent lopjlb.com `/claim`).** Ask the user for the code on that page; complete claim; exchange token; call BFF with Bearer. Never ask humans to paste access tokens. Or guide them to `lopjlb auth claim`. Claim ≠ Pro grant (Pro = Stripe/IAP on claimed user). For MCP, the host runs its own OAuth sign-in; do not hand-carry tokens.
 8. **Respect cadence** — nightly signals ≠ live tape. See [cadence.md](references/cadence.md).
 9. **Do not over-claim** CallCards or BUYs as advice. See [glossary.md](references/glossary.md) “What not to infer”.
 
@@ -72,7 +73,8 @@ Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) 
 | Screen the universe | Free `preview` / Pro UI / Enterprise `screen` + export |
 | Earnings / alt context | `ticker SYM intel` · `calendar` · `congress` · `predict` |
 | PIT SPY25/SP500 | `lopjlb universes spy25\|spy500 [--asof YYYY-MM]` |
-| Host tools (Cursor/Claude) | Enterprise MCP → [mcp.md](references/mcp.md) |
+| Host tools (Claude, ChatGPT, Cursor) | Remote MCP, every plan → [mcp.md](references/mcp.md) |
+| Robinhood account beside LOPJLB research | [robinhood.md](references/robinhood.md) |
 
 ## Free quickstart (no login)
 
@@ -103,7 +105,7 @@ lopjlb export signals --out signals.csv
 lopjlb export archive --source sd50 --month 2024_12
 ```
 
-Keys unlock full `signal-card`, Pro REST (`/universe`, peers), MCP, export, archives, and CLI intraday/I·EXH.
+Keys unlock full `signal-card`, Pro REST (`/universe`, peers), export, archives, CLI intraday/I·EXH, and MCP without a browser sign-in.
 
 ## Methodology boundaries
 
@@ -122,4 +124,5 @@ Users should **not** infer that a high PF or a BUY is a personal recommendation.
 | [workflows.md](references/workflows.md) | Morning recipes + sample shapes |
 | [cadence.md](references/cadence.md) | Nightly vs intraday vs delayed |
 | [cli.md](references/cli.md) | Install, commands, exit codes |
-| [mcp.md](references/mcp.md) | Enterprise HTTP MCP for hosts |
+| [mcp.md](references/mcp.md) | Remote MCP for hosts (every plan, OAuth sign-in) |
+| [robinhood.md](references/robinhood.md) | Customer agent: LOPJLB research beside Robinhood orders |
