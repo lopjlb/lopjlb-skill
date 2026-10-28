@@ -46,6 +46,20 @@ works.
 Add `https://www.lopjlb.com/mcp` as a custom connector (Claude, ChatGPT
 developer mode) or in `mcp.json` (Cursor, VS Code). Sign in when asked.
 
+### CLI and Python (`lopjlb`)
+
+The skill's examples call the `lopjlb` CLI. Free research needs no key and no
+browser.
+
+```bash
+brew install lopjlb/tap/lopjlb        # Homebrew (github.com/lopjlb/homebrew-tap)
+uv tool install lopjlb                # or: pipx install lopjlb
+curl -fsSL https://www.lopjlb.com/install.sh | sh
+```
+
+`import lopjlb` exposes the same REST client from Python
+([PyPI](https://pypi.org/project/lopjlb/)).
+
 Then ask your agent about U.S. equity signals, HMM regime, `lopjlb ticker AAPL`, or the NLP desk (`lopjlb ask` / MCP `ask_research_desk`).
 
 ## What you get (shapes)
