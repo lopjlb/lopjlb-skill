@@ -58,7 +58,7 @@ lopjlb ledger
 lopjlb signal-history
 lopjlb sd50
 lopjlb schema                   # CLI → REST map + schema URL pointers
-lopjlb schema metrics           # 180 screener columns (ui_id ↔ api_key)
+lopjlb schema metrics           # 186 screener columns (ui_id ↔ api_key)
 lopjlb schema presets
 lopjlb schema scopes
 lopjlb ticker AAPL income       # BDC/REIT/CEF/ETF/pref income.metrics

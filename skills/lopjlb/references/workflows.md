@@ -166,7 +166,7 @@ Illustrative slice:
 }
 ```
 
-(Exact list is live at `/bff/api/schema/metrics` — 180 columns.)
+(Exact list is live at `/bff/api/schema/metrics` — 186 columns.)
 
 ## 4) Scan earnings / news / alt context
 

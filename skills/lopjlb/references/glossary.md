@@ -1,6 +1,6 @@
 # Field glossary (agent-facing)
 
-**Authoritative machine-readable dictionary (180 screener columns):**
+**Authoritative machine-readable dictionary (186 screener columns):**
 
 ```bash
 curl -s https://www.lopjlb.com/bff/api/schema/metrics
