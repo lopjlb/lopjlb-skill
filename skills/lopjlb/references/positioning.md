@@ -11,7 +11,7 @@ LOPJLB is **not primarily a data API**. It is a quant research layer on top of m
 | DCF / owner-earnings models | DIY | Rare | Excellent | Not the product (FUND scores absorb inputs) |
 | Guru / 13F portfolio tracking | DIY | Rare | Excellent | No — not a guru-tracker |
 | Per-ticker backtested call | No | Rare / opaque | No | Direction + PF / Sharpe / win rate / expectancy |
-| Market regime gating | DIY | Limited | Limited | HMM regime on every name + history |
+| Market regime gating | DIY | Limited | Limited | Market regime on every name + history |
 | Universe rank (12k+) | DIY | Screener filters | Screener filters | Nightly scored cross-section (Pro / Enterprise) |
 | Earnings narrative | Transcript dump | Headlines | Calendar + estimates | Multi-quarter CallCard synthesis (themes, guidance) |
 | PIT mega-cap / SPX panels | DIY | Partial | Partial | `/universes/spy25` · `/universes/spy500` |

@@ -93,7 +93,7 @@ buy/sell thresholds.
 
 - A BUY is **not** a guarantee of future returns; it is a backtested research opinion.
 - High PF / Sharpe on one ticker is **not** portfolio advice.
-- Regime labels are **not** recession forecasts; they are HMM state estimates.
+- Regime labels are **not** recession forecasts; they are state estimates from the LOPJLB Undercurrent, the market regime model.
 - CallCard prose is **not** a filing substitute — verify material claims in source transcripts/8-Ks.
 - Thin `depth=public` cards are **not** the full research pack.
 

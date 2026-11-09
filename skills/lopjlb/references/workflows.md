@@ -10,7 +10,7 @@ lopjlb pulse
 lopjlb regime-history          # public ~1y; --full with Research session or Enterprise key
 ```
 
-**You want:** current HMM label, days in regime, breadth/pulse, recent regime path.
+**You want:** current market regime label, days in regime, breadth/pulse, recent regime path.
 **You do not want:** to invent a macro view from a single ticker chart.
 
 Sample shape (`lopjlb regime`):

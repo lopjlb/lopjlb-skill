@@ -2,7 +2,7 @@
 name: lopjlb
 description: >
   Use LOPJLB, a quant research layer (not a raw market-data API): nightly backtested
-  signals, HMM regime, factor scores, earnings CallCard synthesis, and universe ranking
+  signals, market regime, factor scores, earnings CallCard synthesis, and universe ranking
   for 12,000+ U.S. names via BFF REST, lopjlb CLI/PyPI, or the remote MCP server (every plan). Use when
   the user wants research opinions, regime context, screener shortlists, signal-card,
   or LOPJLB API/MCP — not when they only need OHLCV (prefer yfinance/broker). Do NOT use
@@ -13,7 +13,7 @@ metadata:
   author: LOPJLB Research
   version: 1.3.0
   category: finance-research
-  tags: equities, etf, signals, regime, hmm, screener, cli, mcp, bff, quant-research
+  tags: equities, etf, signals, regime, market-regime, screener, cli, mcp, bff, quant-research
   documentation: https://www.lopjlb.com/developers
   llms: https://www.lopjlb.com/llms.txt
   pricing: https://www.lopjlb.com/pricing.md
@@ -36,7 +36,7 @@ private model stack.
 | Daily backtested, regime-aware research opinions + synthesis | **LOPJLB** |
 
 Value add in one pass: **signal** (direction, PF, Sharpe, win rate, best-combo) ·
-**context** (HMM regime, breadth) · **synthesis** (CallCards) · **one-symbol stack** ·
+**context** (market regime, breadth) · **synthesis** (CallCards) · **one-symbol stack** ·
 **universe ranking**. Details: [positioning.md](references/positioning.md).
 
 ## Prefer live docs

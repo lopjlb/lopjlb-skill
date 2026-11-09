@@ -35,7 +35,7 @@ lopjlb ticker AAPL scores
 lopjlb ticker AAPL info
 lopjlb ticker AAPL chart
 lopjlb regime
-lopjlb regime-history           # public ~1y HMM history
+lopjlb regime-history           # public ~1y regime history
 lopjlb ask "What is the current market regime?"
 lopjlb ask "AAPL signal brief" --payload   # done JSON: route/symbol/response/followups/embeds
 # Sample done-frames (ticker_context / desk / chart embeds): see workflows.md § NLP desk
@@ -93,7 +93,7 @@ lopjlb screen --preset momentum-pullback --limit 25
 lopjlb peers AAPL
 lopjlb sd50 allocation          # Pro allocation JSON (not public L1 feed)
 lopjlb iexh --limit 40          # I·EXH overlay (API key)
-lopjlb regime-history --full    # full HMM history since ~2010
+lopjlb regime-history --full    # full regime history since ~2010
 lopjlb export signals --out signals.csv   # thin pkl snapshot — not screener book
 lopjlb export archive --source sd50                 # list months
 lopjlb export archive --source sd50 --month 2024_12 # list files

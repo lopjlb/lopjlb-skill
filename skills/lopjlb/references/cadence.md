@@ -8,7 +8,7 @@ Updates after the U.S. cash close; morning-ready:
 
 - Directional signals, PERF / fund scores, best-combo / composite ranks
 - Per-ticker backtest stats attached to the call (PF, Sharpe, win rate, …)
-- HMM regime classification + `regime_history` append
+- Market regime classification + `regime_history` append
 - Universe rankings used by screener / `lopjlb screen` / export snapshots
 - SD50 month-end style allocation artifacts (when the monthly job runs)
 

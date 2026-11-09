@@ -60,7 +60,7 @@ curl -fsSL https://www.lopjlb.com/install.sh | sh
 `import lopjlb` exposes the same REST client from Python
 ([PyPI](https://pypi.org/project/lopjlb/)).
 
-Then ask your agent about U.S. equity signals, HMM regime, `lopjlb ticker AAPL`, or the NLP desk (`lopjlb ask` / MCP `ask_research_desk`).
+Then ask your agent about U.S. equity signals, market regime, `lopjlb ticker AAPL`, or the NLP desk (`lopjlb ask` / MCP `ask_research_desk`).
 
 ## What you get (shapes)
 

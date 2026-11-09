@@ -65,7 +65,7 @@ curl -s -H "X-LOPJLB-API-Key: $LOPJLB_API_KEY" \
 
 **Public teaser fields:** symbol, name, sector, direction, score, regime, hmm_days_in_regime, price, daily_change, sparkline, headline `pf` / `win_rate`, market_cap, `depth`.
 
-**Full pack adds:** PF packs (base / HMM / composite), best-combo, composite_score, fund scores / archetype, ATR / exhaustion / coil, opt metrics, related research fields.
+**Full pack adds:** PF packs (base / regime / composite), best-combo, composite_score, fund scores / archetype, ATR / exhaustion / coil, opt metrics, related research fields.
 
 Field meanings: [glossary.md](glossary.md).
 
