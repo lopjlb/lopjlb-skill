@@ -35,7 +35,7 @@ Short definitions for the big JSON payloads. Full math: https://www.lopjlb.com/m
 | `win_rate` | P | Backtest win rate attached to the call |
 | `expectancy` | P | Per-trade expectancy from the backtest window (full pack) |
 | `sharpe` | P | Risk-adjusted return stat on the published window (full pack) |
-| `best_combo` | P | Grid-searched / preferred setup label for the name (full pack) |
+| `best_combo` | P | Legacy per-ticker grid-searched signal combination, in-sample (full pack). Not Best Combo V5's action; use the `best_combo_v5_*` / `best_combo_oos_*` fields, whose fixed rule does not beat White Arrow or a 200-day-average rule on the same stocks |
 | `composite_score` | P | Blended research rank used in screening (full pack) |
 | `quality_score` / `value_score` / `growth_score` / `garp_score` | P | V4 fundamentals scores. For stocks, `quality_score` is the archetype-weighted Value/Growth/GARP composite plus bounded tilts (positive tilts scaled by valuation support) minus risk penalties; income assets use dedicated quality models. Not comparable across asset classes |
 | `archetype` | P | Stock weighting profile: Dividend Compounder, Growth Compounder, Value / Recovery, or Balanced. Every archetype weights Value at least 50%. ` (blended)` marks a best membership below 0.9, blended toward Balanced without changing the base label |

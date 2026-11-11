@@ -35,7 +35,7 @@ Use GuruFocus when the job is **modeling intrinsic value**. Use LOPJLB when the 
 
 ## What LOPJLB adds
 
-1. **Opinionated daily signals** — BUY/SELL (and flat) with attached out-of-sample stats, not a blank indicator canvas.
+1. **Opinionated daily signals** — BUY/SELL (and flat) with attached backtest stats and their limits, not a blank indicator canvas.
 2. **Regime-aware context** — bull / recovery / ranging / bear / crisis labels that condition interpretation.
 3. **Synthesis** — earnings intel turns calls into a multi-quarter research memo.
 4. **Ranked universe** — the workflow assumes you screen the cross-section, then drill one name.
